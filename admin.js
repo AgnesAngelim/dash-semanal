@@ -228,7 +228,7 @@ function clearForm() {
   });
 
   [
-    'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas',
+    'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog',
     'fPgCartao', 'fPgPix', 'fPgVoucher',
     'fPortAprovado', 'fPortAndamento', 'fPortNegado',
     'fLogEmRota', 'fLogDevolvido', 'fLogEmAberto', 'fLogReeenviado',
@@ -268,10 +268,12 @@ async function saveRecord() {
     cancelamentos:  gn('fCancelamentos'),
     portabilidades: gn('fPortabilidades'),
     novasLinhas:    gn('fNovasLinhas'),
+    log:            gn('fLog'),
     logEmRota:      gn('fLogEmRota'),
     logDevolvido:   gn('fLogDevolvido'),
     logEmAberto:    gn('fLogEmAberto'),
     logReeenviado:  gn('fLogReeenviado'),
+    logEntregue:    gn('fLogEntregue'),
     logAtivo:       gn('fLogAtivo'),
     logNaoAtivo:    gn('fLogNaoAtivo'),
     pgCartao:       gn('fPgCartao'),
