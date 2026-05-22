@@ -183,6 +183,7 @@ async function startEdit(id) {
   g('fPgCartao').value  = r.pgCartao  ?? 0;
   g('fPgPix').value     = r.pgPix     ?? 0;
   g('fPgVoucher').value = r.pgVoucher ?? 0;
+  g('fPgBundle').value  = r.pgBundle  ?? 0;
 
   g('fPortAprovado').value  = r.portAprovado  ?? 0;
   g('fPortAndamento').value = r.portAndamento ?? 0;
@@ -231,7 +232,7 @@ function clearForm() {
 
   [
     'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog', 'fLogEntregue', 'fLogPago',
-    'fPgCartao', 'fPgPix', 'fPgVoucher',
+    'fPgCartao', 'fPgPix', 'fPgVoucher', 'fPgBundle',
     'fPortAprovado', 'fPortAndamento', 'fPortNegado',
     'fLogEmRota', 'fLogDevolvido', 'fLogEmAberto', 'fLogReeenviado',
     'fLogAtivo', 'fLogNaoAtivo', 'fChipEsim', 'fChipFisico'
@@ -282,6 +283,7 @@ async function saveRecord() {
     pgCartao:       gn('fPgCartao'),
     pgPix:          gn('fPgPix'),
     pgVoucher:      gn('fPgVoucher'),
+    pgBundle:       gn('fPgBundle'),
     portAprovado:   gn('fPortAprovado'),
     portAndamento:  gn('fPortAndamento'),
     portNegado:     gn('fPortNegado'),
