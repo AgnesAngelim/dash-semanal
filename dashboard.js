@@ -83,15 +83,15 @@ async function renderDashboard() {
   document.getElementById('kpiCancelamentos').textContent  = d.cancelamentos ?? 0;
   document.getElementById('kpiPortabilidades').textContent = d.portabilidades ?? 0;
   document.getElementById('kpiNovasLinhas').textContent    = d.novasLinhas   ?? 0;
-  document.getElementById('kpiLogistica').textContent     = (d.logEmRota ?? 0) + (d.logDevolvido ?? 0) + (d.logEmAberto ?? 0) + (d.logReeenviado ?? 0) + (d.logAtivo ?? 0) + (d.logNaoAtivo ?? 0);
+  document.getElementById('kpiLogistica').textContent     = d.log ?? 0;
 
   // --- Variações ---
   setKpiVariation('varAtivacoes',    d.ativacoes,     prevRecord?.ativacoes);
   setKpiVariation('varCancelamentos', d.cancelamentos, prevRecord?.cancelamentos, true);
   setKpiVariation('varPortabilidades',d.portabilidades,prevRecord?.portabilidades);
   setKpiVariation('varNovasLinhas',   d.novasLinhas,   prevRecord?.novasLinhas);
-  const logTotal     = (d.logEmRota??0)+(d.logDevolvido??0)+(d.logEmAberto??0)+(d.logReeenviado??0)+(d.logAtivo??0)+(d.logNaoAtivo??0);
-  const logTotalPrev = prevRecord ? (prevRecord.logEmRota??0)+(prevRecord.logDevolvido??0)+(prevRecord.logEmAberto??0)+(prevRecord.logReeenviado??0)+(prevRecord.logAtivo??0)+(prevRecord.logNaoAtivo??0) : undefined;
+  const logTotal     = d.log ?? 0;
+  const logTotalPrev = prevRecord ? prevRecord.log ?? 0 : undefined;
   setKpiVariation('varLogistica', logTotal, logTotalPrev);
 
   // --- Gráficos ---
@@ -108,9 +108,9 @@ async function renderDashboard() {
   );
 
   renderDonut('chartLogistica', 'legendLogistica',
-    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Ativo', 'Não ativo'],
-    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0],
-    ['#10B981', '#EC4899', '#06B6D4', '#8B5CF6', '#4143e2', '#475569']
+    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Ativo', 'Não ativo'],
+    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logEntregue ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0],
+    ['#10B981', '#EC4899', '#06B6D4', '#8B5CF6', '#84CC16', '#4143e2', '#475569']
   );
 
   renderDonut('chartChip', 'legendChip',
