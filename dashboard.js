@@ -96,9 +96,9 @@ async function renderDashboard() {
 
   // --- Gráficos ---
   renderDonut('chartPagamento', 'legendPagamento',
-    ['Cartão', 'Pix', 'Voucher'],
-    [d.pgCartao ?? 0, d.pgPix ?? 0, d.pgVoucher ?? 0],
-    ['#34D399', '#EC4899', '#8B5CF6']
+    ['Cartão', 'Pix', 'Voucher', 'Bundle'],
+    [d.pgCartao ?? 0, d.pgPix ?? 0, d.pgVoucher ?? 0, d.pgBundle ?? 0],
+    ['#34D399', '#EC4899', '#8B5CF6', '#06B6D4']
   );
 
   renderDonut('chartPortStatus', 'legendPortStatus',
