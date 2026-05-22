@@ -108,9 +108,9 @@ async function renderDashboard() {
   );
 
   renderDonut('chartLogistica', 'legendLogistica',
-    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Ativo', 'Não ativo'],
-    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logEntregue ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0],
-    ['#10B981', '#EC4899', '#06B6D4', '#8B5CF6', '#84CC16', '#4143e2', '#475569']
+    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Pago', 'Ativo', 'Não ativo'],
+    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logEntregue ?? 0, d.logPago ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0],
+    ['#10B981', '#EC4899', '#06B6D4', '#8B5CF6', '#F59E0B', '#84CC16', '#4143e2', '#475569']
   );
 
   renderDonut('chartChip', 'legendChip',
