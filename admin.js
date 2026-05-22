@@ -177,7 +177,9 @@ async function startEdit(id) {
   g('fCancelamentos').value  = r.cancelamentos  ?? 0;
   g('fPortabilidades').value = r.portabilidades ?? 0;
   g('fNovasLinhas').value    = r.novasLinhas    ?? 0;
-
+  g('fLog').value            = r.log            ?? 0;
+  g('fLogEntregue').value    = r.logEntregue    ?? 0;
+  g('fLogPago').value        = r.logPago        ?? 0;
   g('fPgCartao').value  = r.pgCartao  ?? 0;
   g('fPgPix').value     = r.pgPix     ?? 0;
   g('fPgVoucher').value = r.pgVoucher ?? 0;
@@ -228,7 +230,7 @@ function clearForm() {
   });
 
   [
-    'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog',
+    'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog', 'fLogEntregue', 'fLogPago',
     'fPgCartao', 'fPgPix', 'fPgVoucher',
     'fPortAprovado', 'fPortAndamento', 'fPortNegado',
     'fLogEmRota', 'fLogDevolvido', 'fLogEmAberto', 'fLogReeenviado',
@@ -274,6 +276,7 @@ async function saveRecord() {
     logEmAberto:    gn('fLogEmAberto'),
     logReeenviado:  gn('fLogReeenviado'),
     logEntregue:    gn('fLogEntregue'),
+    logPago:        gn('fLogPago'),
     logAtivo:       gn('fLogAtivo'),
     logNaoAtivo:    gn('fLogNaoAtivo'),
     pgCartao:       gn('fPgCartao'),
