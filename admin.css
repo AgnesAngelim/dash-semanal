@@ -1,0 +1,123 @@
+/* ============================================================
+   DASHBOARD SEMANAL — admin.css
+   Estilos exclusivos da tela de preenchimento
+   ============================================================ */
+
+/* ----- Layout ----- */
+.main-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 36px 24px;
+}
+
+/* ----- Logo gradiente âmbar/vermelho ----- */
+.logo-icon.admin { background: linear-gradient(135deg, #059669, #10B981); }
+
+/* ----- Lista de registros ----- */
+.records-list { margin-top: 4px; }
+
+.record-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  transition: border-color .2s;
+  gap: 16px;
+}
+.record-item:hover { border-color: var(--border2); }
+
+.record-item-info { flex: 1; min-width: 0; }
+.record-item-title {
+  font-size: 14px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.record-item-sub {
+  font-size: 12px; color: var(--muted);
+  margin-top: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.record-item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px; cursor: pointer;
+  transition: all .2s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+.btn-icon:hover { background: var(--surface); color: var(--text); }
+
+.btn-icon.edit {
+  color: var(--accent);
+  border-color: rgba(59,130,246,.3);
+}
+.btn-icon.edit:hover { background: rgba(59,130,246,.1); }
+
+.btn-icon.del {
+  color: var(--red);
+  border-color: rgba(239,68,68,.3);
+}
+.btn-icon.del:hover { background: rgba(239,68,68,.1); }
+
+/* ----- Estado vazio ----- */
+.empty-records {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ----- Divider dentro de form ----- */
+.form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ----- Destaque no card em edição ----- */
+.form-card.editing {
+  border-color: rgba(59,130,246,.4);
+  box-shadow: 0 0 0 1px rgba(59,130,246,.15);
+}
+.edit-banner {
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.25);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #93c5fd;
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.edit-banner button {
+  background: transparent; border: none;
+  color: #93c5fd; font-size: 13px; cursor: pointer;
+  font-family: var(--font-body);
+}
+.edit-banner button:hover { text-decoration: underline; }
+
+/* ----- Spinner dentro de botão ----- */
+.btn.loading { opacity: .7; pointer-events: none; }
+.btn .spinner {
+  width: 14px; height: 14px;
+  border-width: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 600px) {
+  .main-content { padding: 24px 16px; }
+  .record-item { flex-direction: column; align-items: flex-start; }
+  .record-item-actions { width: 100%; }
+  .btn-icon { flex: 1; text-align: center; }
+}
