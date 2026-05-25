@@ -183,6 +183,7 @@ async function startEdit(id) {
   g('fLogContel').value             = r.logContel            ?? 0;
   g('fLogEntregue').value           = r.logEntregue          ?? 0;
   g('fLogPago').value               = r.logPago              ?? 0;
+  g('fLogColetado').value           = r.logColetado          ?? 0;
   g('fPgCartao').value  = r.pgCartao  ?? 0;
   g('fPgPix').value     = r.pgPix     ?? 0;
   g('fPgVoucher').value = r.pgVoucher ?? 0;
@@ -236,7 +237,7 @@ function clearForm() {
   [
     'fAtivacoesBackOffice', 'fAtivacoesContel', 'fClientesFaltantes', 'fCancelamentos', 
     'fPortabilidades', 'fNovasLinhas', 'fLogBackOffice', 
-    'fLogContel', 'fLogEntregue', 'fLogPago', 'fLogExtras',
+    'fLogContel', 'fLogEntregue', 'fLogPago', 'fLogColetado', 'fLogExtras',
     'fPgCartao', 'fPgPix', 'fPgVoucher', 'fPgBundle',
     'fPortAprovado', 'fPortAndamento', 'fPortNegado',
     'fLogEmRota', 'fLogDevolvido', 'fLogEmAberto', 'fLogReeenviado',
@@ -286,6 +287,7 @@ async function saveRecord() {
     logReeenviado:         gn('fLogReeenviado'),
     logEntregue:           gn('fLogEntregue'),
     logPago:               gn('fLogPago'),
+    logColetado:           gn('fLogColetado'),
     logAtivo:              gn('fLogAtivo'),
     logNaoAtivo:           gn('fLogNaoAtivo'),
     logExtras:             gn('fLogExtras'),
