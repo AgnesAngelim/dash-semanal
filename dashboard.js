@@ -79,14 +79,18 @@ async function renderDashboard() {
   );
 
   // --- KPIs ---
-  document.getElementById('kpiAtivacoes').textContent     = d.ativacoes    ?? 0;
+  document.getElementById('kpiAtivacoesBackOffice').textContent     = d.ativacoesBackOffice    ?? 0;
+  document.getElementById('kpiAtivacoesContel').textContent       = d.ativacoesContel        ?? 0;
+  document.getElementById('kpiClientesFaltantes').textContent     = d.clientesFaltantes      ?? 0;
   document.getElementById('kpiCancelamentos').textContent  = d.cancelamentos ?? 0;
   document.getElementById('kpiPortabilidades').textContent = d.portabilidades ?? 0;
   document.getElementById('kpiNovasLinhas').textContent    = d.novasLinhas   ?? 0;
   document.getElementById('kpiLogistica').textContent     = d.log ?? 0;
 
   // --- Variações ---
-  setKpiVariation('varAtivacoes',    d.ativacoes,     prevRecord?.ativacoes);
+  setKpiVariation('varAtivacoesBackOffice',    d.ativacoesBackOffice,     prevRecord?.ativacoesBackOffice);
+  setKpiVariation('varAtivacoesContel', d.ativacoesContel, prevRecord?.ativacoesContel);
+  setKpiVariation('varClientesFaltantes', d.clientesFaltantes, prevRecord?.clientesFaltantes);
   setKpiVariation('varCancelamentos', d.cancelamentos, prevRecord?.cancelamentos, true);
   setKpiVariation('varPortabilidades',d.portabilidades,prevRecord?.portabilidades);
   setKpiVariation('varNovasLinhas',   d.novasLinhas,   prevRecord?.novasLinhas);
