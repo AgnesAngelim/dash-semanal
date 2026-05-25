@@ -111,6 +111,9 @@
 .kpi-card.green::before  { background: linear-gradient(90deg, #10B981, #34D399); }
 .kpi-card.red::before    { background: linear-gradient(90deg, #EC4899, #f71f8b); }
 .kpi-card.purple::before { background: linear-gradient(90deg, #8B5CF6, #6366F1); }
+.kpi-card.yellow::before { background: linear-gradient(90deg, #FBBF24, #F59E0B); }
+.kpi-card.cyan::before   { background: linear-gradient(90deg, #06B6D4, #22D3EE); }
+
 
 .kpi-icon {
   width: 40px; height: 40px;
@@ -122,6 +125,8 @@
 .kpi-icon.green  { background: rgba(16,185,129,.12); }
 .kpi-icon.red    { background: rgba(239,68,68,.12); }
 .kpi-icon.purple { background: rgba(139,92,246,.12); }
+.kpi-icon.yellow { background: rgba(251,191,36,.12); }
+.kpi-icon.cyan   { background: rgba(6,182,212,.12); }
 .kpi-icon svg { width: 20px; height: 20px; }
 
 .kpi-label {
@@ -148,7 +153,8 @@
 .kpi-value.green  { color: #34D399; }
 .kpi-value.red    { color: #EC4899; }
 .kpi-value.purple { color: #8B5CF6; }
-
+.kpi-value.yellow { color: #FBBF24; }
+.kpi-value.cyan   { color: #06B6D4; }
 /* ----- Rows de gráficos ----- */
 .charts-row {
   display: grid;
