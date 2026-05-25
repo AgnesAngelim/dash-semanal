@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Semanal</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-icon dash">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Dashboard Semanal</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="week-selector">
+        <label for="weekSelect">Período:</label>
+        <select id="weekSelect" onchange="onWeekChange()">
+        </select>
+      </div>
+      <div class="last-update" id="lastUpdate">—</div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       BANNER SEM DADOS
+  ============================================================ -->
+  <div id="noDashData" class="no-data-banner" style="display:none">
+    <h2>Nenhum dado encontrado</h2>
+    <p>Acesse a tela de preenchimento para inserir os dados semanais.</p>
+    <a href="admin.html">Ir para preenchimento →</a>
+  </div>
+
+  <!-- ============================================================
+       CONTEÚDO PRINCIPAL
+  ============================================================ -->
+  <main class="main-content" id="dashContent" style="display:none">
+
+    <!-- Barra de período -->
+    <div class="period-info">
+      <div class="period-month" id="pMonth">—</div>
+      <div class="period-sep">·</div>
+      <div class="period-week"  id="pWeek">—</div>
+      <div class="period-dates" id="pDates">—</div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+
+      <div class="kpi-card blue">
+        <div class="kpi-label">Ativações Backoffice</div>
+        <div class="kpi-value blue" id="kpiAtivacoesBackOffice">—</div>
+        <div class="kpi-variation" id="varAtivacoesBackOffice"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalAtivacoesBackOffice"></span>
+          <span class="kpi-prev" id="prevAtivacoesBackOffice"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card cyan">
+        <div class="kpi-label">Ativações Contel</div>
+        <div class="kpi-value cyan" id="kpiAtivacoesContel">—</div>
+        <div class="kpi-variation" id="varAtivacoesContel"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalAtivacoesContel"></span>
+          <span class="kpi-prev" id="prevAtivacoesContel"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card yellow">
+        <div class="kpi-label">Clientes Faltantes</div>
+        <div class="kpi-value yellow" id="kpiClientesFaltantes">—</div>
+        <div class="kpi-variation" id="varClientesFaltantes"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalClientesFaltantes"></span>
+          <span class="kpi-prev" id="prevClientesFaltantes"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card red">
+        <div class="kpi-label">Cancelamentos</div>
+        <div class="kpi-value red" id="kpiCancelamentos">—</div>
+        <div class="kpi-variation" id="varCancelamentos"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalCancelamentos"></span>
+          <span class="kpi-prev" id="prevCancelamentos"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-label">Portabilidades</div>
+        <div class="kpi-value purple" id="kpiPortabilidades">—</div>
+        <div class="kpi-variation" id="varPortabilidades"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalPortabilidades"></span>
+          <span class="kpi-prev" id="prevPortabilidades"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card green">
+        <div class="kpi-label">Novas Linhas</div>
+        <div class="kpi-value green" id="kpiNovasLinhas">—</div>
+        <div class="kpi-variation" id="varNovasLinhas"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalNovasLinhas"></span>
+          <span class="kpi-prev" id="prevNovasLinhas"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-label">Logística BackOffice</div>
+        <div class="kpi-value purple" id="kpiLogisticaBackOffice">—</div>
+        <div class="kpi-variation" id="varLogisticaBackOffice"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalLogisticaBackOffice"></span>
+          <span class="kpi-prev" id="prevLogisticaBackOffice"></span>
+        </div>
+      </div>
+
+      <div class="kpi-card cyan">
+        <div class="kpi-label">Logística Contel</div>
+        <div class="kpi-value cyan" id="kpiLogisticaContel">—</div>
+        <div class="kpi-variation" id="varLogisticaContel"></div>
+        <div class="kpi-meta">
+          <span class="kpi-total" id="totalLogisticaContel"></span>
+          <span class="kpi-prev" id="prevLogisticaContel"></span>
+        </div>
+      </div>
+    </div>
+    <!-- /KPIs -->
+
+    <!-- Gráficos — 4 em linha, alinhado com KPIs -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Formas de Pagamento</div>
+        <div class="chart-sub">Cartão · Pix · Voucher</div>
+        <div class="donut-wrap">
+          <canvas id="chartPagamento" role="img" aria-label="Gráfico de formas de pagamento">Dados de formas de pagamento.</canvas>
+        </div>
+        <div class="chart-legend" id="legendPagamento"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Status das Portabilidades</div>
+        <div class="chart-sub">Aprovado · Em andamento · Negado</div>
+        <div class="donut-wrap">
+          <canvas id="chartPortStatus" role="img" aria-label="Gráfico de status de portabilidades">Dados de portabilidades.</canvas>
+        </div>
+        <div class="chart-legend" id="legendPortStatus"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Logística</div>
+        <div class="chart-sub">Status de envio</div>
+        <div class="donut-wrap">
+          <canvas id="chartLogistica" role="img" aria-label="Gráfico de logística">Dados de logística.</canvas>
+        </div>
+        <div class="chart-legend" id="legendLogistica"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Tipo de Chip</div>
+        <div class="chart-sub">eSIM vs Físico</div>
+        <div class="donut-wrap">
+          <canvas id="chartChip" role="img" aria-label="Gráfico de tipo de chip">Dados de tipo de chip.</canvas>
+        </div>
+        <div class="chart-legend" id="legendChip"></div>
+      </div>
+    </div>
+
+  </main>
+  <!-- /main -->
+
+  <footer class="site-footer">
+    Agnes Angelim
+  </footer>
+
+  <!-- Toast global -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scripts: Chart.js → dados compartilhados → lógica da tela -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="data.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

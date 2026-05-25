@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preenchimento Semanal — Admin</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-icon admin">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Administração</div>
+        <div class="logo-sub">Preenchimento Semanal</div>
+      </div>
+    </div>
+    <a href="dashboard.html" class="nav-link">← Ver Dashboard</a>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Registros Salvos -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div class="section-title">Registros Salvos</div>
+        <div class="section-sub" id="recordCount">carregando...</div>
+      </div>
+      <div class="records-list" id="recordsList">
+        <div class="empty-records"><span class="spinner"></span> Carregando dados...</div>
+      </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="card" id="formCard">
+
+      <input type="hidden" id="editId">
+      <input type="hidden" id="fMes">
+
+      <div class="edit-banner" id="editBanner" style="display:none">
+        <span id="editBannerText">Editando registro</span>
+        <button onclick="clearForm()">Cancelar edição ✕</button>
+      </div>
+
+      <!-- 1. PERÍODO -->
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Período</div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:20px">
+        <div class="field">
+          <label>Mês de Referência *</label>
+          <div style="display:flex;gap:8px;">
+            <select id="fMesNome" onchange="syncMesField()" style="flex:2">
+              <option value="">Selecione o mês</option>
+              <option value="Janeiro">Janeiro</option>
+              <option value="Fevereiro">Fevereiro</option>
+              <option value="Março">Março</option>
+              <option value="Abril">Abril</option>
+              <option value="Maio">Maio</option>
+              <option value="Junho">Junho</option>
+              <option value="Julho">Julho</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Setembro">Setembro</option>
+              <option value="Outubro">Outubro</option>
+              <option value="Novembro">Novembro</option>
+              <option value="Dezembro">Dezembro</option>
+            </select>
+            <select id="fMesAno" onchange="syncMesField()" style="flex:1"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fSemana">Semana de Referência</label>
+          <select id="fSemana" onchange="onSemanaChange()">
+            <option value="1">Semana 1</option>
+            <option value="2">Semana 2</option>
+            <option value="3">Semana 3</option>
+            <option value="4">Semana 4</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="group-label">Datas de cada semana do mês</div>
+      <div class="weeks-grid">
+        <div class="week-row">
+          <div class="week-row-title">Semana 1</div>
+          <input type="text" id="fData1" placeholder="01/01 a 07/01">
+        </div>
+        <div class="week-row">
+          <div class="week-row-title">Semana 2</div>
+          <input type="text" id="fData2" placeholder="08/01 a 14/01">
+        </div>
+        <div class="week-row">
+          <div class="week-row-title">Semana 3</div>
+          <input type="text" id="fData3" placeholder="15/01 a 21/01">
+        </div>
+        <div class="week-row">
+          <div class="week-row-title">Semana 4</div>
+          <input type="text" id="fData4" placeholder="22/01 a 31/01">
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- 2. KPIs -->
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">KPIs Principais</div>
+      </div>
+      <div class="grid-4">
+        <div class="field"><label for="fAtivacoesBackOffice">Ativações BackOffice</label><input type="number" id="fAtivacoesBackOffice" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fAtivacoesContel">Ativações Contel</label><input type="number" id="fAtivacoesContel" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fClientesFaltantes">Clientes faltantes</label><input type="number" id="fClientesFaltantes" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fCancelamentos">Cancelamentos</label><input type="number" id="fCancelamentos" placeholder="Ex: 50" min="0"></div>
+        <div class="field"><label for="fPortabilidades">Portabilidades</label><input type="number" id="fPortabilidades" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fNovasLinhas">Novas Linhas</label><input type="number" id="fNovasLinhas" placeholder="Ex: 200" min="0"></div>
+        <div class="field"><label for="fLogBackOffice">Logística BackOffice</label><input type="number" id="fLogBackOffice" placeholder="Ex: 125" min="0"></div>
+        <div class="field"><label for="fLogContel">Logística Contel</label><input type="number" id="fLogContel" placeholder="Ex: 125" min="0"></div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- 3. PAGAMENTO -->
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Formas de Pagamento</div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label for="fPgCartao">Cartão</label><input type="number" id="fPgCartao" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fPgPix">Pix</label><input type="number" id="fPgPix" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fPgVoucher">Voucher</label><input type="number" id="fPgVoucher" placeholder="Ex: 200" min="0"></div>
+        <div class="field"><label for="fPgBundle">Bundle</label><input type="number" id="fPgBundle" placeholder="Ex: 200" min="0"></div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- 4. PORTABILIDADES -->
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Status das Portabilidades</div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label for="fPortAprovado">Aprovado</label><input type="number" id="fPortAprovado" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fPortAndamento">Em Andamento</label><input type="number" id="fPortAndamento" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fPortNegado">Negado</label><input type="number" id="fPortNegado" placeholder="Ex: 50" min="0"></div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- 5. LOGÍSTICA -->
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Logística</div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label for="fLogEmRota">Em rota</label><input type="number" id="fLogEmRota" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fLogDevolvido">Devolvido</label><input type="number" id="fLogDevolvido" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fLogEmAberto">Em aberto</label><input type="number" id="fLogEmAberto" placeholder="Ex: 50" min="0"></div>
+        <div class="field"><label for="fLogReeenviado">Reenviado</label><input type="number" id="fLogReeenviado" placeholder="Ex: 75" min="0"></div>
+        <div class="field"><label for="fLogEntregue">Entregue</label><input type="number" id="fLogEntregue" placeholder="Ex: 125" min="0"></div>
+        <div class="field"><label for="fLogPago">Pago</label><input type="number" id="fLogPago" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fLogColetado">Coletado</label><input type="number" id="fLogColetado" placeholder="Ex: 100" min="0"></div>
+        <div class="field"><label for="fLogAtivo">Ativo</label><input type="number" id="fLogAtivo" placeholder="Ex: 200" min="0"></div>
+        <div class="field"><label for="fLogNaoAtivo">Não ativo</label><input type="number" id="fLogNaoAtivo" placeholder="Ex: 25" min="0"></div>
+        <div class="field"><label for="fLogExtras">Envios extras</label><input type="number" id="fLogExtras" placeholder="Ex: 10" min="0"></div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- 6. CHIP -->
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Tipo de Chip</div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label for="fChipEsim">eSIM</label><input type="number" id="fChipEsim" placeholder="Ex: 150" min="0"></div>
+        <div class="field"><label for="fChipFisico">Físico</label><input type="number" id="fChipFisico" placeholder="Ex: 100" min="0"></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="clearForm()">Limpar</button>
+        <button class="btn btn-primary" id="btnSave" onclick="saveRecord()">💾 Salvar Dados</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
