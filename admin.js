@@ -173,13 +173,15 @@ async function startEdit(id) {
   g('fData3').value  = r.data3  ?? '';
   g('fData4').value  = r.data4  ?? '';
 
-  g('fAtivacoes').value      = r.ativacoes      ?? 0;
-  g('fCancelamentos').value  = r.cancelamentos  ?? 0;
-  g('fPortabilidades').value = r.portabilidades ?? 0;
-  g('fNovasLinhas').value    = r.novasLinhas    ?? 0;
-  g('fLog').value            = r.log            ?? 0;
-  g('fLogEntregue').value    = r.logEntregue    ?? 0;
-  g('fLogPago').value        = r.logPago        ?? 0;
+  g('fAtivacoesBackOffice').value   = r.ativacoesBackOffice  ?? 0;
+  g('fAtivacoesContel').value       = r.ativacoesContel      ?? 0;
+  g('fClientesFaltantes').value     = r.clientesFaltantes    ?? 0;
+  g('fCancelamentos').value         = r.cancelamentos        ?? 0;
+  g('fPortabilidades').value        = r.portabilidades       ?? 0;
+  g('fNovasLinhas').value           = r.novasLinhas          ?? 0;
+  g('fLog').value                   = r.log                  ?? 0;
+  g('fLogEntregue').value           = r.logEntregue          ?? 0;
+  g('fLogPago').value               = r.logPago              ?? 0;
   g('fPgCartao').value  = r.pgCartao  ?? 0;
   g('fPgPix').value     = r.pgPix     ?? 0;
   g('fPgVoucher').value = r.pgVoucher ?? 0;
@@ -231,7 +233,7 @@ function clearForm() {
   });
 
   [
-    'fAtivacoes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog', 'fLogEntregue', 'fLogPago',
+    'fAtivacoesBackOffice', 'fAtivacoesContel', 'fClientesFaltantes', 'fCancelamentos', 'fPortabilidades', 'fNovasLinhas', 'fLog', 'fLogEntregue', 'fLogPago',
     'fPgCartao', 'fPgPix', 'fPgVoucher', 'fPgBundle',
     'fPortAprovado', 'fPortAndamento', 'fPortNegado',
     'fLogEmRota', 'fLogDevolvido', 'fLogEmAberto', 'fLogReeenviado',
@@ -267,28 +269,30 @@ async function saveRecord() {
     id: editId || DS.generateId(),
     mes, semana, dataInicio,
     data1: _data1, data2: _data2, data3: _data3, data4: _data4,
-    ativacoes:      gn('fAtivacoes'),
-    cancelamentos:  gn('fCancelamentos'),
-    portabilidades: gn('fPortabilidades'),
-    novasLinhas:    gn('fNovasLinhas'),
-    log:            gn('fLog'),
-    logEmRota:      gn('fLogEmRota'),
-    logDevolvido:   gn('fLogDevolvido'),
-    logEmAberto:    gn('fLogEmAberto'),
-    logReeenviado:  gn('fLogReeenviado'),
-    logEntregue:    gn('fLogEntregue'),
-    logPago:        gn('fLogPago'),
-    logAtivo:       gn('fLogAtivo'),
-    logNaoAtivo:    gn('fLogNaoAtivo'),
-    pgCartao:       gn('fPgCartao'),
-    pgPix:          gn('fPgPix'),
-    pgVoucher:      gn('fPgVoucher'),
-    pgBundle:       gn('fPgBundle'),
-    portAprovado:   gn('fPortAprovado'),
-    portAndamento:  gn('fPortAndamento'),
-    portNegado:     gn('fPortNegado'),
-    chipEsim:       gn('fChipEsim'),
-    chipFisico:     gn('fChipFisico'),
+    ativacoesBackOffice:      gn('fAtivacoesBackOffice'),
+    ativacoesContel:       gn('fAtivacoesContel'),
+    clientesFaltantes:     gn('fClientesFaltantes'),
+    cancelamentos:         gn('fCancelamentos'),
+    portabilidades:        gn('fPortabilidades'),
+    novasLinhas:           gn('fNovasLinhas'),
+    log:                   gn('fLog'),
+    logEmRota:             gn('fLogEmRota'),
+    logDevolvido:          gn('fLogDevolvido'),
+    logEmAberto:           gn('fLogEmAberto'),
+    logReeenviado:         gn('fLogReeenviado'),
+    logEntregue:           gn('fLogEntregue'),
+    logPago:               gn('fLogPago'),
+    logAtivo:              gn('fLogAtivo'),
+    logNaoAtivo:           gn('fLogNaoAtivo'),
+    pgCartao:              gn('fPgCartao'),
+    pgPix:                 gn('fPgPix'),
+    pgVoucher:             gn('fPgVoucher'),
+    pgBundle:              gn('fPgBundle'),
+    portAprovado:          gn('fPortAprovado'),
+    portAndamento:         gn('fPortAndamento'),
+    portNegado:            gn('fPortNegado'),
+    chipEsim:              gn('fChipEsim'),
+    chipFisico:            gn('fChipFisico'),
     updatedAt: DS.nowFormatted(),
   };
 
