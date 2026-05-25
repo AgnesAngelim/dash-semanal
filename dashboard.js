@@ -88,16 +88,36 @@ async function renderDashboard() {
   document.getElementById('kpiLogisticaBackOffice').textContent     = d.logBackOffice ?? 0;
   document.getElementById('kpiLogisticaContel').textContent = d.logContel ?? 0;
 
-  // --- Variações ---
+  // --- Total acumulado do mês (todas as semanas até a atual) ---
+  const semanaAtual = Number(d.semana);
+  const registrosMes = records.filter(r => r.mes === d.mes && Number(r.semana) <= semanaAtual);
+  const soma = field => registrosMes.reduce((acc, r) => acc + (r[field] ?? 0), 0);
+
+  function setKpiExtra(totalId, prevId, totalVal, prevVal) {
+    const tEl = document.getElementById(totalId);
+    if (tEl) tEl.textContent = `Total mês: ${totalVal}`;
+    const pEl = document.getElementById(prevId);
+    if (pEl) pEl.textContent = prevVal !== undefined && prevVal !== null ? `Sem. ant.: ${prevVal}` : '';
+  }
+
+  setKpiExtra('totalAtivacoesBackOffice', 'prevAtivacoesBackOffice', soma('ativacoesBackOffice'), prevRecord?.ativacoesBackOffice);
+  setKpiExtra('totalAtivacoesContel',     'prevAtivacoesContel',     soma('ativacoesContel'),     prevRecord?.ativacoesContel);
+  setKpiExtra('totalClientesFaltantes',   'prevClientesFaltantes',   soma('clientesFaltantes'),   prevRecord?.clientesFaltantes);
+  setKpiExtra('totalCancelamentos',       'prevCancelamentos',       soma('cancelamentos'),       prevRecord?.cancelamentos);
+  setKpiExtra('totalPortabilidades',      'prevPortabilidades',      soma('portabilidades'),      prevRecord?.portabilidades);
+  setKpiExtra('totalNovasLinhas',         'prevNovasLinhas',         soma('novasLinhas'),         prevRecord?.novasLinhas);
+  setKpiExtra('totalLogisticaBackOffice', 'prevLogisticaBackOffice', soma('logBackOffice'),       prevRecord?.logBackOffice);
+  setKpiExtra('totalLogisticaContel',     'prevLogisticaContel',     soma('logContel'),           prevRecord?.logContel);
+
+  // --- Variações (seta) ---
   setKpiVariation('varAtivacoesBackOffice',    d.ativacoesBackOffice,     prevRecord?.ativacoesBackOffice);
   setKpiVariation('varAtivacoesContel', d.ativacoesContel, prevRecord?.ativacoesContel);
   setKpiVariation('varClientesFaltantes', d.clientesFaltantes, prevRecord?.clientesFaltantes);
   setKpiVariation('varCancelamentos', d.cancelamentos, prevRecord?.cancelamentos, true);
   setKpiVariation('varPortabilidades',d.portabilidades,prevRecord?.portabilidades);
   setKpiVariation('varNovasLinhas',   d.novasLinhas,   prevRecord?.novasLinhas);
-  const logBackOffice     = d.logBackOffice ?? 0;
+  const logBackOffice = d.logBackOffice ?? 0;
   const logContel = d.logContel ?? 0;
-  const logTotalPrev = prevRecord ? (prevRecord.logBackOffice ?? 0) + (prevRecord.logContel ?? 0) : undefined;
   setKpiVariation('varLogisticaBackOffice', logBackOffice, prevRecord?.logBackOffice);
   setKpiVariation('varLogisticaContel', logContel, prevRecord?.logContel);
 
@@ -113,6 +133,7 @@ async function renderDashboard() {
     [d.portAprovado ?? 0, d.portAndamento ?? 0, d.portNegado ?? 0],
     ['#34D399', '#EC4899', '#8B5CF6']
   );
+        
 
   renderDonut('chartLogistica', 'legendLogistica',
     ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Pago', 'Ativo', 'Não ativo', 'Envios extras'],
@@ -142,13 +163,13 @@ function setKpiVariation(elId, current, previous, invertColors = false) {
   const pct  = Math.round((diff / previous) * 100);
 
   if (pct === 0) {
-    el.textContent = '→ 0% vs semana anterior';
+    el.textContent = '→ 0%';
     el.className = 'kpi-variation neutral';
     return;
   }
 
   const arrow = pct > 0 ? '↑' : '↓';
-  el.textContent = `${arrow} ${Math.abs(pct)}% vs semana anterior`;
+  el.textContent = `${arrow} ${Math.abs(pct)}%`;
   // invertColors: subir é ruim (vermelho), baixar é bom (verde)
   const isGood = invertColors ? pct < 0 : pct > 0;
   el.className = 'kpi-variation ' + (isGood ? 'up' : 'down');
