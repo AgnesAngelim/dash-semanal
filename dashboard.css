@@ -1,0 +1,217 @@
+/* ============================================================
+   DASHBOARD SEMANAL — dashboard.css
+   ============================================================ */
+
+/* ----- Layout principal ----- */
+.main-content {
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ----- Header logo ----- */
+.logo-icon.dash { background: linear-gradient(135deg, #10B981, #06B6D4); }
+
+/* ----- Seletor de semana ----- */
+.week-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+}
+.week-selector label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.week-selector select {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; outline: none;
+  min-width: 180px;
+}
+.week-selector select option { background: var(--surface2); }
+
+.last-update {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+/* ----- Banner sem dados ----- */
+.no-data-banner {
+  background: linear-gradient(135deg, #1a2234, #0f1929);
+  border: 1px dashed #2a3a5c;
+  border-radius: var(--radius-xl);
+  margin: 40px;
+  padding: 60px;
+  text-align: center;
+}
+.no-data-banner h2 { font-size: 22px; font-weight: 600; margin-bottom: 10px; color: var(--muted); }
+.no-data-banner p  { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+.no-data-banner a  {
+  color: var(--accent); font-weight: 500; font-size: 14px;
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px; display: inline-block;
+}
+
+/* ----- Barra de período ----- */
+.period-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.period-month { font-size: 20px; font-weight: 700; letter-spacing: -.5px; }
+.period-sep   { color: var(--border2); font-size: 20px; }
+.period-week  { font-size: 13px; color: var(--muted); }
+.period-dates {
+  font-size: 13px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  margin-left: auto;
+}
+
+/* ----- KPI grid — 4 colunas, 2 linhas ----- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.kpi-card:hover { transform: translateY(-2px); border-color: var(--border2); }
+.kpi-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.kpi-card.blue::before   { background: linear-gradient(90deg, #10B981, #06B6D4); }
+.kpi-card.green::before  { background: linear-gradient(90deg, #10B981, #34D399); }
+.kpi-card.red::before    { background: linear-gradient(90deg, #EC4899, #f71f8b); }
+.kpi-card.purple::before { background: linear-gradient(90deg, #8B5CF6, #6366F1); }
+.kpi-card.yellow::before { background: linear-gradient(90deg, #FBBF24, #F59E0B); }
+.kpi-card.cyan::before   { background: linear-gradient(90deg, #06B6D4, #22D3EE); }
+
+.kpi-label {
+  font-size: 11px; color: var(--muted);
+  margin-bottom: 6px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .5px;
+}
+.kpi-value {
+  font-size: 30px; font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: -1px; line-height: 1;
+}
+/* Cor da letra */
+.kpi-value.blue   { color: #ffffffd3; }
+.kpi-value.green  { color: #ffffffd3; }
+.kpi-value.red    { color: #ffffffd3; }
+.kpi-value.purple { color: #ffffffd3; }
+.kpi-value.yellow { color: #ffffffd3; }
+.kpi-value.cyan   { color: #ffffffd3; }
+
+.kpi-variation {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 6px;
+  letter-spacing: 0;
+}
+.kpi-variation.up      { color: #10B981; }
+.kpi-variation.down    { color: #EF4444; }
+.kpi-variation.neutral { color: var(--muted); }
+
+/* ----- Gráficos — 4 em linha, alinhado com KPIs ----- */
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px; 
+  min-width: 0;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+.chart-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.chart-sub   { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+
+.donut-wrap {
+  position: relative; 
+  flex: 1;
+  width: 100%;
+  height: 180px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin-bottom: 10px; 
+}
+
+.chart-legend {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+  margin-top: auto; /* Garante que a legenda fique colada no rodapé do card */
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Opcional: linha sutil separando a legenda */
+}
+.legend-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--muted);
+}
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%; flex-shrink: 0;
+}
+.legend-val {
+  font-weight: 600; color: var(--text);
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 900px) {
+  .main-content { padding: 20px 16px; }
+  .kpi-grid   { grid-template-columns: repeat(2, 1fr); }
+  .charts-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .charts-row { grid-template-columns: 1fr; }
+}
