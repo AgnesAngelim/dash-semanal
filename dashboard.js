@@ -108,7 +108,6 @@ async function renderDashboard() {
   setKpiExtra('totalNovasLinhas',         'prevNovasLinhas',         soma('novasLinhas'),         prevRecord?.novasLinhas);
   setKpiExtra('totalLogisticaBackOffice', 'prevLogisticaBackOffice', soma('logBackOffice'),       prevRecord?.logBackOffice);
   setKpiExtra('totalLogisticaContel',     'prevLogisticaContel',     soma('logContel'),           prevRecord?.logContel);
-
   // --- Variações (seta) ---
   setKpiVariation('varAtivacoesBackOffice',    d.ativacoesBackOffice,     prevRecord?.ativacoesBackOffice);
   setKpiVariation('varAtivacoesContel', d.ativacoesContel, prevRecord?.ativacoesContel);
@@ -118,6 +117,7 @@ async function renderDashboard() {
   setKpiVariation('varNovasLinhas',   d.novasLinhas,   prevRecord?.novasLinhas);
   const logBackOffice = d.logBackOffice ?? 0;
   const logContel = d.logContel ?? 0;
+  const logColetado = d.logColetado ?? 0;
   setKpiVariation('varLogisticaBackOffice', logBackOffice, prevRecord?.logBackOffice);
   setKpiVariation('varLogisticaContel', logContel, prevRecord?.logContel);
 
@@ -136,9 +136,9 @@ async function renderDashboard() {
         
 
   renderDonut('chartLogistica', 'legendLogistica',
-    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Pago', 'Ativo', 'Não ativo', 'Envios extras'],
-    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logEntregue ?? 0, d.logPago ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0, d.logExtras ?? 0],
-    ['#8B5CF6', '#10B981', '#EC4899', '#8B5CF6', '#F59E0B', '#84CC16', '#4143e2', '#475569', '#06B6D4']
+    ['Em rota', 'Devolvido', 'Em aberto', 'Reenviado', 'Entregue', 'Pago', 'Coletado', 'Ativo', 'Não ativo', 'Envios extras'],
+    [d.logEmRota ?? 0, d.logDevolvido ?? 0, d.logEmAberto ?? 0, d.logReeenviado ?? 0, d.logEntregue ?? 0, d.logPago ?? 0, d.logColetado ?? 0, d.logAtivo ?? 0, d.logNaoAtivo ?? 0, d.logExtras ?? 0],
+    ['#8B5CF6', '#10B981', '#EC4899', '#8B5CF6', '#F59E0B', '#84CC16', '#4143e2', '#5aeb72', '#06B6D4', '#e09251']
   );
 
   renderDonut('chartChip', 'legendChip',
